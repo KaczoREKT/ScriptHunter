@@ -21,7 +21,7 @@ def check_file():
     for path in paths:
         for root_dir, _, files in os.walk(path):  # os.walk iteruje przez katalogi i pliki
             for file in files:
-                if file.lower().startswith(file_prefix.lower()):  # Sprawdź prefiks nazwy
+                if file_prefix.lower() in file.lower():  # Sprawdź prefiks nazwy
                     found_files.append(os.path.join(root_dir, file))  # Zapisz pełną ścieżkę
 
     # Wyświetlenie wyników
@@ -57,6 +57,8 @@ clear_button.pack()
 result_text = tk.StringVar()
 result_label = tk.Label(frame, textvariable=result_text, justify=tk.LEFT, wraplength=400, fg="blue")
 result_label.pack(pady=10)
+
+entry.bind("<Return>", lambda event: check_file())
 
 # Uruchomienie aplikacji
 root.mainloop()
